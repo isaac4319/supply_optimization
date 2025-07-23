@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
-st.title("Supply Chain Forecast")
 
 df = pd.read_csv("../data/forecasted_demand.csv")
 sku = st.selectbox("Choose SKU", df['sku'].unique())
 wh = st.selectbox("Choose Warehouse", df['warehouse'].unique())
 df2 = pd.read_csv("../Data/data/demand.csv")
+
+df2['date'] = pd.to_datetime(df2['date'])
 
 st.title("Intelligent Demand Forecast")
 
