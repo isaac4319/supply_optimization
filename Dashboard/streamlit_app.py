@@ -25,7 +25,7 @@ if st.button("Forecast Tomorrow's Demand"):
     today = pd.to_datetime(today_input)
     yesterday = today - pd.Timedelta(days=1)
     last_7_days = pd.date_range(end=yesterday, periods=7)
-    model = joblib.load("../Notebooks/ML_model.ipynb")
+    model = joblib.load("../Data/lgbm_model.pkl")
 
     #Filter for that SKU & warehouse
     filtered = df2[
