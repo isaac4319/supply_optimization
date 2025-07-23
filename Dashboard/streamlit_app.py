@@ -7,30 +7,30 @@ sku = st.selectbox("Choose SKU", df['sku'].unique())
 wh = st.selectbox("Choose Warehouse", df['warehouse'].unique())
 
 
-st.title("📦 Intelligent Demand Forecast")
+st.title("Intelligent Demand Forecast")
 
 st.write("Enter a product and warehouse, and get tomorrow’s forecast based on recent behavior.")
 
-# --- User inputs ---
+#User inputs
 sku_input = st.text_input("SKU ID", value="P1079")
 warehouse_input = st.text_input("warehouse", value="W01")
 today_input = st.date_input("Today's Date", pd.Timestamp.today().date())
 
-# --- Forecast trigger ---
-if st.button("🔮 Forecast Tomorrow's Demand"):
+#Forecast trigger
+if st.button("Forecast Tomorrow's Demand"):
 
     # --- Prepare data ---
     today = pd.to_datetime(today_input)
     yesterday = today - pd.Timedelta(days=1)
     last_7_days = pd.date_range(end=yesterday, periods=7)
 
-    # Filter for that SKU & warehouse
-    filtered = dataset[
-        (dataset['sku'] == sku_input) &
-        (dataset['warehouse'] == warehouse_input)
+    #Filter for that SKU & warehouse
+    filtered = df[
+        (df['sku'] == sku_input) &
+        (df['warehouse'] == warehouse_input)
     ].sort_values("date")
 
-    # --- Extract lag_1 and rolling_7 ---
+    #Extract lag_1 and rolling_7
     try:
         lag_1 = filtered.loc[filtered['date'] == yesterday, 'demand_units'].values[0]
         rolling_7 = filtered[filtered['date'].isin(last_7_days)]['demand_units'].mean()
