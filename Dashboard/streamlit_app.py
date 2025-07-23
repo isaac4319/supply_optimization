@@ -5,7 +5,7 @@ st.title("Supply Chain Forecast")
 df = pd.read_csv("../data/forecasted_demand.csv")
 sku = st.selectbox("Choose SKU", df['sku'].unique())
 wh = st.selectbox("Choose Warehouse", df['warehouse'].unique())
-
+df2 = pd.read_csv("../Data/data/demand.csv")
 
 st.title("Intelligent Demand Forecast")
 
@@ -25,9 +25,9 @@ if st.button("Forecast Tomorrow's Demand"):
     last_7_days = pd.date_range(end=yesterday, periods=7)
 
     #Filter for that SKU & warehouse
-    filtered = df[
-        (df['sku'] == sku_input) &
-        (df['warehouse'] == warehouse_input)
+    filtered = df2[
+        (df2['sku'] == sku_input) &
+        (df2['warehouse'] == warehouse_input)
     ].sort_values("date")
 
     #Extract lag_1 and rolling_7
