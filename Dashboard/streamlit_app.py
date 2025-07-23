@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import joblib
 
 df = pd.read_csv("../data/forecasted_demand.csv")
 sku = st.selectbox("Choose SKU", df['sku'].unique())
@@ -24,6 +25,7 @@ if st.button("Forecast Tomorrow's Demand"):
     today = pd.to_datetime(today_input)
     yesterday = today - pd.Timedelta(days=1)
     last_7_days = pd.date_range(end=yesterday, periods=7)
+    model = joblib.load("../Notebooks/ML_model.ipynb")
 
     #Filter for that SKU & warehouse
     filtered = df2[
