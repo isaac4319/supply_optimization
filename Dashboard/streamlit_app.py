@@ -28,10 +28,16 @@ if st.button("Forecast Tomorrow's Demand"):
         .sort_values("date")
     )
 
-    # Compute lag_1 (yesterday) with fallback
-    try:
-        lag_1 = filtered.loc[filtered['date'] == yesterday, 'demand_units'].values[0]
-    except IndexError:
+    # If there's no data at all, show error
+    if filtered.empty:
+        st.error(f"No historical demand data for SKU {sku_input} at warehouse {warehouse_input}.")
+        st.stop()
+
+    # Compute lag_1 (yesterday) with fallback to most recent
+    lag_data = filtered.loc[filtered['date'] == yesterday, 'demand_units']
+    if not lag_data.empty:
+        lag_1 = lag_data.values[0]
+    else:
         lag_1 = filtered['demand_units'].iloc[-1]
 
     # Compute 7‑day rolling average with fallback
@@ -39,7 +45,11 @@ if st.button("Forecast Tomorrow's Demand"):
     if not window.empty:
         rolling_7 = window.mean()
     else:
-        rolling_7 = filtered['demand_units'].rolling(7).mean().iloc[-1]
+        rolling_series = filtered['demand_units'].rolling(7).mean().dropna()
+        if not rolling_series.empty:
+            rolling_7 = rolling_series.iloc[-1]
+        else:
+            rolling_7 = filtered['demand_units'].mean()
 
     day_of_week = today.dayofweek
 
