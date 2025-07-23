@@ -8,4 +8,4 @@ wh = st.selectbox("Choose Warehouse", df['warehouse'].unique())
 
 filtered = df[(df['sku'] == sku) & (df['warehouse'] == wh)]
 filtered['date'] = pd.to_datetime(filtered['date'])
-st.line_chart(filtered.set_index('date')['forecasted_demand_units'])
+st.line_chart(filtered.set_index('date')['predicted_demand'])
