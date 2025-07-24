@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 from pyngrok import ngrok
 import os
-from pyngrok import config
+from pyngrok import conf
 
 conf.get_default().auth_token = os.getenv("30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d")
 
