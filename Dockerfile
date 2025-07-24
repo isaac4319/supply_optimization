@@ -1,23 +1,26 @@
-# Use a slim Python image
 FROM python:3.9
 
 # Set working directory
 WORKDIR /app
 
-# Copy only the requirements first (for better caching)
-COPY requirements.txt .
+# Install system packages
+RUN apt-get update && apt-get install -y unzip wget
 
-# Install dependencies
+# Install ngrok
+RUN wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip && \
+    unzip ngrok-v3-stable-linux-amd64.zip && \
+    mv ngrok /usr/local/bin && \
+    rm ngrok-v3-stable-linux-amd64.zip
+
+# Install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the repo
+# Copy app code
 COPY . .
 
-# Expose the Streamlit port
+# Expose Streamlit port
 EXPOSE 8501
 
-# Use an environment file for secrets
-# When you run, pass --env-file .env
-RUN ngrok config add-authtoken 30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d
-# Run Streamlit in headless mode
-ENTRYPOINT ["streamlit", "run", "Dashboard/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# Runtime entrypoint
+CMD ["bash", "-c", "ngrok config add-authtoken $NGROK_AUTHTOKEN && streamlit run Dashboard/streamlit_app.py --server.port=8501 --server.address=0.0.0.0"]
