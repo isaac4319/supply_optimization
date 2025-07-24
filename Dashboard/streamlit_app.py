@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from pyngrok import ngrok
+
+public_url = ngrok.connect(port=8501)
+print(f"Public URL: {public_url}")
 
 df2 = pd.read_csv("Data/data/demand.csv")
 df2['date'] = pd.to_datetime(df2['date'])

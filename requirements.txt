@@ -15,3 +15,6 @@ pulp>=2.7.0
 # Snowflake integration
 python-dotenv>=1.0.0
 snowflake-connector-python>=3.0.0
+
+#Public url using Ngrok
+pyngrok>=6.0.0
