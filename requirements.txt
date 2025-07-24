@@ -1,12 +1,17 @@
+# Core
 streamlit>=1.24.0
 pandas>=2.0.0
 numpy>=1.23.0
+matplotlib>=3.7.0
+
+# Machine learning & modeling
 lightgbm>=4.6.0
 scikit-learn>=1.2.0
-pulp>=2.7.0
 joblib>=1.3.0
+
+# Optimization
+pulp>=2.7.0
+
+# Snowflake integration
 python-dotenv>=1.0.0
 snowflake-connector-python>=3.0.0
-streamlit-cytoscape>=0.0.4
-matplotlib>=3.7.0
-         
