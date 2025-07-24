@@ -1,0 +1,12 @@
+streamlit>=1.24.0
+pandas>=2.0.0
+numpy>=1.23.0
+lightgbm>=4.6.0
+scikit-learn>=1.2.0
+pulp>=2.7.0
+joblib>=1.3.0
+python-dotenv>=1.0.0
+snowflake-connector-python>=3.0.0
+streamlit-cytoscape>=0.0.4
+matplotlib>=3.7.0
+         
