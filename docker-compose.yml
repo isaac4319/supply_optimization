@@ -9,3 +9,9 @@ services:
       - .:/app:ro
     environment:
       - NGROK_AUTHTOKEN=30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d
+    entrypoint: >
+      bash -c "
+      ngrok config add-authtoken $NGROK_AUTHTOKEN &&
+      ngrok http 8501 --log=stdout > /dev/null &
+      streamlit run Dashboard/streamlit_app.py --server.port=8501 --server.address=0.0.0.0
+      "
