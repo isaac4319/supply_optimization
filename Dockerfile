@@ -18,6 +18,6 @@ EXPOSE 8501
 
 # Use an environment file for secrets
 # When you run, pass --env-file .env
-
+RUN ngrok config add-authtoken 30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d
 # Run Streamlit in headless mode
 ENTRYPOINT ["streamlit", "run", "Dashboard/streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
