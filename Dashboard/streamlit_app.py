@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-df2 = pd.read_csv("../Data/data/demand.csv")
+df2 = pd.read_csv("Data/data/demand.csv")
 df2['date'] = pd.to_datetime(df2['date'])
 
-model = joblib.load("../Data/lgbm_model.pkl")
+model = joblib.load("Data/lgbm_model.pkl")
 
 st.title("Intelligent Demand Forecast")
 
