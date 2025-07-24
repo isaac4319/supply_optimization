@@ -7,4 +7,4 @@ services:
     volumes:
       - .:/app:ro
     environment:
-      - NGROK_AUTHTOKEN=30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d
+      NGROK_AUTHTOKEN=30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d
