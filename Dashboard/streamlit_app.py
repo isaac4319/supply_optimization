@@ -7,8 +7,8 @@ from pyngrok import conf
 
 conf.get_default().auth_token = os.getenv("30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d")
 
-# Use the "http" tunnel type explicitly
-public_url = ngrok.connect("http://localhost:8501")
+if "public_url" not in st.session_statestate:
+st.session_state.public_url = ngrok.connect("http://localhost:8501")
 print(f"Public URL: {public_url}")
 
 df2 = pd.read_csv("Data/data/demand.csv")
