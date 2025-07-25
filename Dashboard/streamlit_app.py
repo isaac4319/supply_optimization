@@ -7,7 +7,7 @@ from pyngrok import conf
 
 conf.get_default().auth_token = os.getenv("30KG7CXJ98uCMAWO4MvYyDrYUrc_2BhKFvpHZhVFRWbG3iz7d")
 
-if "public_url" not in st.session_statestate:
+if "public_url" not in st.session_state:
     st.session_state.public_url = ngrok.connect("http://localhost:8501")
     print(f"Public URL: {public_url}")
 
